@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "dadjokes",
+  "version": "${version}",
+
+  "name": "Dad Jokes",
+  "description": "Pester the entire server with terrible dad jokes",
+  "authors": [
+    "Simon Levermann (sonOfRa)"
+  ],
+  "contact": {
+    "sources": "https://github.com/sonOfRa/fabric-dadjokes"
+  },
+
+  "license": "Apache-2.0",
+
+  "environment": "server",
+  "entrypoints": {
+    "server": [
+      "de.slevermann.fabric.dadjokes.DadJokes"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "fabric": "*",
+    "minecraft": "1.18.x",
+    "java": ">=17"
+  }
+}
