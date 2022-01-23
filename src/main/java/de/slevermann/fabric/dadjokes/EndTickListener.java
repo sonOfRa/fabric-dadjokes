@@ -28,11 +28,13 @@ public class EndTickListener implements ServerTickEvents.EndTick {
     @Override
     public void onEndTick(MinecraftServer server) {
         if (counter.getAndUpdate(l -> l == tickInterval ? 0 : (l + 1)) == tickInterval) {
-            fetcher.getDadJoke(server).thenAccept(lines -> {
-                for (String s : lines) {
-                    server.getPlayerManager().broadcast(Text.of(s), MessageType.CHAT, NIL_UUID);
-                }
-            });
+            if (server.getCurrentPlayerCount() > 0) {
+                fetcher.getDadJoke(server).thenAccept(lines -> {
+                    for (String s : lines) {
+                        server.getPlayerManager().broadcast(Text.of(s), MessageType.CHAT, NIL_UUID);
+                    }
+                });
+            }
         }
     }
 
