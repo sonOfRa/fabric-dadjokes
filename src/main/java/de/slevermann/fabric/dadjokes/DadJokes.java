@@ -25,7 +25,7 @@ public class DadJokes implements DedicatedServerModInitializer {
             dispatcher.getRoot().addChild(flachWitzNode);
         }));
 
-        final EndTickListener endTickListener = new EndTickListener(dadJokeFetcher, Duration.ofSeconds(20));
+        final EndTickListener endTickListener = new EndTickListener(dadJokeFetcher, Duration.ofMinutes(10));
         ServerTickEvents.END_SERVER_TICK.register(endTickListener);
     }
 }
