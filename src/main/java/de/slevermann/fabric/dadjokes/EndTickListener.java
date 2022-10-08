@@ -1,7 +1,6 @@
 package de.slevermann.fabric.dadjokes;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.minecraft.network.MessageType;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.text.Text;
 
@@ -31,7 +30,7 @@ public class EndTickListener implements ServerTickEvents.EndTick {
             if (server.getCurrentPlayerCount() > 0) {
                 fetcher.getDadJoke(server).thenAccept(lines -> {
                     for (String s : lines) {
-                        server.getPlayerManager().broadcast(Text.of(s), MessageType.CHAT, NIL_UUID);
+                        server.getPlayerManager().broadcast(Text.of(s), false);
                     }
                 });
             }

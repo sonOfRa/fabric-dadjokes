@@ -2,7 +2,7 @@ package de.slevermann.fabric.dadjokes;
 
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import net.fabricmc.api.DedicatedServerModInitializer;
-import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
@@ -20,10 +20,10 @@ public class DadJokes implements DedicatedServerModInitializer {
         final LiteralCommandNode<ServerCommandSource> flachWitzNode = CommandManager
                 .literal("flachwitz")
                 .executes(dadJokeCommand).build();
-        CommandRegistrationCallback.EVENT.register(((dispatcher, dedicated) -> {
+        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             dispatcher.getRoot().addChild(dadJokeNode);
             dispatcher.getRoot().addChild(flachWitzNode);
-        }));
+        });
 
         final EndTickListener endTickListener = new EndTickListener(dadJokeFetcher, Duration.ofMinutes(10));
         ServerTickEvents.END_SERVER_TICK.register(endTickListener);
